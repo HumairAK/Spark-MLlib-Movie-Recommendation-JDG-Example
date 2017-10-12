@@ -101,4 +101,44 @@ class MovieController @Inject() extends Controller
     Forbidden("error")
   }
 
+  implicit val rds = (
+    (__ \ 'user).read[String] and
+      (__ \ 'rating).read[String] and
+      (__ \ 'product).read[String]
+    ) tupled
+
+  def mockDisplayReport = Action(parse.json) { request =>
+    request.body.validate[(String, String, String)].map{
+      case (user, product, rating) =>
+        val mockDataSet = Json.obj(
+          "status" ->"OK",
+          "columns" -> Json.arr(
+            Json.obj("data" -> "id", "title" -> "ID"),
+            Json.obj("data" -> "movie", "title" -> "Movie Title"),
+            Json.obj("data" -> "year", "title" -> "Release Year")
+          ),
+          "dataSet" -> Json.arr(
+            Json.obj("id" -> "1", "movie" -> "Detachment", "year" -> "2004"),
+            Json.obj("id" -> "2", "movie" -> "Alexander", "year" -> "2011"),
+            Json.obj("id" -> "3", "movie" -> "Black Hawk Down", "year" -> "2001"),
+            Json.obj("id" -> "4", "movie" -> "Bourne Identity, The", "year" -> "2002"),
+            Json.obj("id" -> "5", "movie" -> "Cast Away", "year" -> "2000"),
+            Json.obj("id" -> "6", "movie" -> "Drive", "year" -> "2011"),
+            Json.obj("id" -> "7", "movie" -> "Fargo", "year" -> "1996"),
+            Json.obj("id" -> "8", "movie" -> "Full Metal Jacket", "year" -> "1987"),
+            Json.obj("id" -> "9", "movie" -> "Gattaca", "year" -> "1997"),
+            Json.obj("id" -> "10", "movie" -> "Hitch", "year" -> "2005"),
+            Json.obj("id" -> "12", "movie" -> "Matrix", "year" -> "1999"),
+            Json.obj("id" -> "13", "movie" -> "Miami Vice", "year" -> "2006"),
+            Json.obj("id" -> "14", "movie" -> "Catch Me if You Can", "year" -> "2004"),
+            Json.obj("id" -> "15", "movie" -> "Ocean's 11", "year" -> "2001"),
+            Json.obj("id" -> "16", "movie" -> "Platoon", "year" -> "2001"),
+            Json.obj("id" -> "17", "movie" -> "Romeo + Juliet", "year" -> "1996")
+          )
+      )
+      Ok(mockDataSet)
+    }.recoverTotal{
+      e => BadRequest("Detected error:"+ JsError.toJson(e))
+    }
+  }
 }

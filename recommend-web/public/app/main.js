@@ -18,18 +18,9 @@ import '../node_modules/patternfly/dist/js/patternfly.min.js';
 //Patternfly Pagination
 import '../node_modules/patternfly/dist/js/patternfly.dataTables.pfPagination.js';
 
-// -------------------------------
-//Moment
-import '../node_modules/patternfly/node_modules/moment/min/moment.min';
 
 //Bootstrap Combobox
 import '../node_modules/patternfly/node_modules/patternfly-bootstrap-combobox/js/bootstrap-combobox';
-
-//Bootstrap Date Picker
-import '../node_modules/patternfly/node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.min';
-
-//Bootstrap Date Time Picker - requires Moment
-import '../node_modules/patternfly/node_modules/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min';
 
 //Bootstrap Select
 import '../node_modules/patternfly/node_modules/bootstrap-select/dist/js/bootstrap-select.min';

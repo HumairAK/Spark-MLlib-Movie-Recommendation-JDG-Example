@@ -1,18 +1,21 @@
-import { createStore, combineReducers, applyMiddleware } from "redux";
+import { createStore, combineReducers, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
-import messageReducer from "./pf-lib/message/messageReducer";
-import modalReducer from "./pf-lib/modal/modalReducer";
-import movieReducer from "./movieRating/movieReducers";
-import arReducer from "./addRating/addRatingReducers";
-
+import messageReducer from './pf-lib/message/messageReducer';
+import modalReducer from './pf-lib/modal/modalReducer';
+import movieReducer from './movieRating/movieReducers';
+import addRatingReducer from './addRating/addRatingReducer';
+import { createForms } from 'react-redux-form';
+import { initialFormUserState } from './addRating/addRatingReducer.js'
 
 export default createStore(
   combineReducers({
     modalReducer,
     messageReducer,
     movieReducer,
-    arReducer,
+    addRatingReducer,
+    ...createForms({
+      display: initialFormUserState,
+    })
   }),
   applyMiddleware(thunk)
 );
-
