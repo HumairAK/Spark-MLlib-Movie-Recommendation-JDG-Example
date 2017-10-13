@@ -2,7 +2,6 @@ import React, {Component} from "react";
 import PropTypes from "prop-types";
 import Table from "../../table/TableView.jsx";
 import { connect } from "react-redux";
-//import { dataSet } from '../dataSet.js';
 import { handleGetRec } from '../addRatingActions.js';
 import RecForm from "../components/RecForm.jsx";
 

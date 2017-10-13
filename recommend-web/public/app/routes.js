@@ -4,6 +4,6 @@ export const ROUTES = {
   },
 
   MR: {
-    GET_REC_MOVIE_RATING: '/BLABLA',
+    GET_REC_MOVIE_RATING: '/results/mock/report',
   },
 };

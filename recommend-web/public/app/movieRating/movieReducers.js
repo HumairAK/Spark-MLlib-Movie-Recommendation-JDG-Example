@@ -1,12 +1,23 @@
-import { AR } from "./movieRatingConstants"
+import { MR } from "./movieRatingConstants"
 
 const initialState = {
   stuff: {},
 };
 
+export const initialRatingsFormUserState = {
+  user: '',
+};
+
+
 const movieRatingReducer = (state = initialState, action) => {
   switch (action.type) {
-    case AR.DO_STUFF: {
+    case MR.UPDATE_DATASET: {
+      state = {
+        ...state,
+        dataSet: action.payload.dataSet,
+        columns: action.payload.columns,
+        submittedReportRequest: true
+      };
       break;
     }
   }

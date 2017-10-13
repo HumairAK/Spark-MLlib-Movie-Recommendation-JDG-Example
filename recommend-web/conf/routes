@@ -23,3 +23,5 @@ GET     /rating/export              controllers.MovieController.ExportRatings
 GET     /rating/custom              controllers.MovieController.DisplayCustomRatings
 
 POST    /rating/mock/report         controllers.MovieController.mockDisplayReport
+
+POST    /results/mock/report         controllers.MovieController.mockResultsReport

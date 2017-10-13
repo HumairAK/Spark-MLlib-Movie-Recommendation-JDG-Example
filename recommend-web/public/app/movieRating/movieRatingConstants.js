@@ -1,3 +1,3 @@
-export const AR = {
-  DO_STUFF: "AR_DO_STUFF",
+export const MR = {
+  UPDATE_DATASET: "AR_UPDATE_DATASET",
 };

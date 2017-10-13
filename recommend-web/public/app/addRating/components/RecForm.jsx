@@ -7,7 +7,7 @@ import PropTypes from "prop-types";
 class RecForm extends Component {
   static get propTypes() {
     return {
-      handleSubmit: PropTypes.func,
+      handleSubmit: PropTypes.func.isRequired,
     }
   }
 

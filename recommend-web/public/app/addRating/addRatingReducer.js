@@ -15,9 +15,6 @@ export const initialFormUserState = {
 const addRatingReducer = (state = initialState, action) => {
   switch (action.type) {
     case AR.UPDATE_DATASET: {
-      //let id = action.payload;
-      console.log(action.payload.dataSet);
-      console.log(action.payload.columns);
       state = {
         ...state,
         dataSet: action.payload.dataSet,

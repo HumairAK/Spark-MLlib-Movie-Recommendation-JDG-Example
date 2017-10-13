@@ -1,7 +1,6 @@
 import { AR } from './addRatingConstants'
 import { ROUTES } from '../routes.js'
 export function handleGetRec(data){
-  console.log(data);
   return (dispatch) => {
     $.ajax({
       type: 'POST',
@@ -11,7 +10,6 @@ export function handleGetRec(data){
       contentType: 'application/json',
       success: function (result) {
         // result should have columns and dataSet
-        console.log(result);
         dispatch(submitReq(result));
       },
       error: function () {}
