@@ -39,7 +39,7 @@ class MovieRating extends Component {
     if(this.props.submittedReportRequest === true){
       recTable =
         <div className="card-pf card-pf-accented">
-          <h2 className="card-pf-title"> Results </h2>
+          <h2 className="card-pf-title"> Recommended products for user </h2>
           <div className="card-pf-footer">
             <Table config={this._tableConfig()} />
           </div>
@@ -55,12 +55,7 @@ class MovieRating extends Component {
               <DisplayReportForm handleSubmit={this.props.handleGetRec}/>
             </div>
           </div>
-          <div className="card-pf card-pf-accented">
-            <h2 className="card-pf-title"> Recommended Products for User </h2>
-            <div className="card-pf-footer">
-              {recTable}
-            </div>
-          </div>
+          {recTable}
         </div>
       </div>
     )
