@@ -9,12 +9,12 @@ class Table extends Component {
   }
 
   componentDidMount() {
-    //console.log("Did Mount");
+    console.log("Did Mount");
     $(this.table).DataTable(this.props.config);
   }
 
   componentWillUnmount(){
-    //console.log("Unmounting");
+    console.log("Unmounting");
     $(this.table).DataTable().destroy();
   }
 
@@ -32,7 +32,7 @@ class Table extends Component {
       return false;
     };
     return(
-      <form className="content-view-pf-pagination table-view-pf-pagination clearfix" id="pagination1">
+    <form className="content-view-pf-pagination table-view-pf-pagination clearfix" id="pagination1">
         <div className="form-group">
           <select className="selectpicker pagination-pf-pagesize" defaultValue={"15"}>
             <option value="6">6</option>
@@ -63,6 +63,8 @@ class Table extends Component {
   }
 
   render() {
+    console.log("Rendering");
+
     return (
       <div>
         {this._table()}

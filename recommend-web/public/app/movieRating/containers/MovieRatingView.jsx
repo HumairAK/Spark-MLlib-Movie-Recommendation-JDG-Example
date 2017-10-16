@@ -5,7 +5,6 @@ import DisplayReportForm from "../components/DisplayReportForm.jsx";
 import PropTypes from "prop-types";
 import { handleGetRec } from '../movieActions.js';
 
-
 class MovieRating extends Component {
   static get propTypes() {
     return {
@@ -62,12 +61,11 @@ class MovieRating extends Component {
   }
 }
 
-
 const mapStateToProps = (state) => {
   return {
-    submittedReportRequest: state.addRatingReducer.submittedReportRequest,
-    columns: state.addRatingReducer.columns,
-    dataSet: state.addRatingReducer.dataSet,
+    submittedReportRequest: state.movieReducer.submittedReportRequest,
+    columns: state.movieReducer.columns,
+    dataSet: state.movieReducer.dataSet,
   }
 };
 
