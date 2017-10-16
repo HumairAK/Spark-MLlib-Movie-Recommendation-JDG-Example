@@ -1,7 +1,9 @@
 import { MR } from "./movieRatingConstants"
 
 const initialState = {
-  stuff: {},
+  dataSet: [],
+  columns: [],
+  submittedReportRequest: false,
 };
 
 export const initialRatingsFormUserState = {

@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from 'prop-types';
+//import SelectOption from './selectOption.jsx';
+import * as _ from 'underscore';
 
 class Table extends Component {
   static get propTypes() {
@@ -8,68 +10,78 @@ class Table extends Component {
     }
   }
 
-  componentDidMount() {
-    console.log("Did Mount");
-    $(this.table).DataTable(this.props.config);
-  }
+  shouldComponentUpdate(nextProps) {
+    console.log("Should Update");
 
-  componentWillUnmount(){
-    console.log("Unmounting");
-    $(this.table).DataTable().destroy();
-  }
+    /* Table has not been created (see ComponentDidMount()).*/
+    if(this.props.config.data.length === 0)
+      return true;
+    else if(nextProps.config.data !== this.props.config.data)
+      this._reloadTableData(nextProps.config.data);
+    else
+      this._updateTable(nextProps.config.data);
 
-  shouldComponentUpdate() {
     return false;
+  }
+
+  _reloadTableData(data) {
+    //console.log(data);
+    const table = $(this.table).DataTable();
+    table.clear();
+    table.rows.add(data);
+    table.draw();
+  }
+
+  _updateTable(newData) {
+    const table = $(this.table).DataTable();
+    let dataChanged = false;
+    table.rows().every(function () {
+      const oldDataRow = this.data();
+      const newDataRow = newData.find((newRow) => {
+        return _.isEqual(newRow, oldDataRow);
+      });
+
+      if (_.isEqual(newDataRow, oldDataRow)) {
+        dataChanged = true;
+        this.data(newDataRow);
+      }
+      return true; // RCA esLint configuration wants us to
+      // return something
+    });
+
+    if (dataChanged) {
+      table.draw();
+    }
   }
 
   _table(){
     return <table ref={table => this.table = table } className="table table-striped table-bordered table-hover" id="table1"/>
   }
 
-  _form(){
-    let preventDefaultClick = (e) => {
-      e.preventDefault();
-      return false;
-    };
-    return(
-    <form className="content-view-pf-pagination table-view-pf-pagination clearfix" id="pagination1">
-        <div className="form-group">
-          <select className="selectpicker pagination-pf-pagesize" defaultValue={"15"}>
-            <option value="6">6</option>
-            <option value="10" >10</option>
-            <option value="15" >15</option>
-            <option value="25">25</option>
-            <option value="50">50</option>
-          </select>
-          <span>per page</span>
-        </div>
-
-        <div className="form-group">
-          <span><span className="pagination-pf-items-current"/> of <span className="pagination-pf-items-total"/></span>
-          <ul className="pagination pagination-pf-back">
-            <li><a href="#" onClick={preventDefaultClick} title="First Page"><span className="i fa fa-angle-double-left"/></a></li>
-            <li><a href="#" onClick={preventDefaultClick} title="Previous Page"><span className="i fa fa-angle-left"/></a></li>
-          </ul>
-          <label htmlFor="pagination1-page" className="sr-only">Current Page</label>
-          <input className="pagination-pf-page" type="text" id="pagination1-page" defaultValue="1"/>
-          <span>of <span className="pagination-pf-pages"/></span>
-          <ul className="pagination pagination-pf-forward">
-            <li><a href="#" onClick={preventDefaultClick} title="Next Page"><span className="i fa fa-angle-right"/></a></li>
-            <li><a href="#" onClick={preventDefaultClick}  title="Last Page"><span className="i fa fa-angle-double-right"/></a></li>
-          </ul>
-        </div>
-      </form>
-    )
-  }
-
   render() {
     console.log("Rendering");
+    return this._table();
+  }
 
-    return (
-      <div>
-        {this._table()}
-        {this._form()}
-      </div>);
+
+  componentDidUpdate(){
+    console.log("Did Update");
+
+    if(this.props.config.data.length !== 0)
+      $(this.table).DataTable(this.props.config);
+  }
+
+  componentDidMount() {
+    console.log("Did Mount");
+
+    if(this.props.config.data.length !== 0)
+      $(this.table).DataTable(this.props.config);
+  }
+
+  componentWillUnmount(){
+    console.log("Will Unmount");
+
+    $(this.table).DataTable().destroy();
   }
 }
 
